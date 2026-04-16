@@ -10,57 +10,76 @@
   <link rel="apple-touch-icon" sizes="180x180" href="icon_home.png">
 
   <style>
-    /* RESET */
     *{
       margin:0;
       padding:0;
       box-sizing:border-box;
     }
 
-    /* BODY */
     body{
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height:100vh;
       display:flex;
       align-items:center;
       justify-content:center;
       text-align:center;
       padding:20px;
-
       background:
         radial-gradient(circle at 30% 20%, rgba(172,132,0,0.25), transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(253,238,121,0.2), transparent 50%),
         linear-gradient(135deg, #342800, #1a1400);
-
       color:#fdee79;
     }
 
-    /* CARD */
     .card{
-      background: rgba(52,40,0,0.65);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background:rgba(52,40,0,0.65);
+      backdrop-filter:blur(20px);
+      -webkit-backdrop-filter:blur(20px);
       border-radius:25px;
       padding:40px 25px;
       width:90%;
       max-width:420px;
-
       box-shadow:
         0 0 40px rgba(172,132,0,0.3),
         inset 0 0 20px rgba(253,238,121,0.1);
-
       border:1px solid rgba(253,238,121,0.2);
     }
 
-    /* LOGO */
+    .logo{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+    }
+
+    .logo button{
+      background:none;
+      border:none;
+      padding:0;
+      cursor:pointer;
+      display:block;
+    }
+
+    .logo button:focus-visible{
+      outline:2px solid rgba(253,238,121,0.8);
+      outline-offset:8px;
+      border-radius:18px;
+    }
+
     .logo img{
       width:220px;
       max-width:100%;
       height:auto;
       margin-bottom:25px;
+      display:block;
+      transition:transform 0.18s ease, filter 0.18s ease;
     }
 
-    /* TEXT */
+    .logo button:hover img,
+    .logo button:focus-visible img{
+      transform:scale(1.02);
+      filter:drop-shadow(0 0 10px rgba(253,238,121,0.18));
+    }
+
     h1{
       font-size:28px;
       margin-bottom:15px;
@@ -73,7 +92,6 @@
       line-height:1.5;
     }
 
-    /* STATUS */
     .status{
       margin-top:25px;
       display:flex;
@@ -100,14 +118,144 @@
       100%{opacity:1;}
     }
 
-    /* FOOTER */
     .footer{
       margin-top:20px;
       font-size:13px;
       color:#bba94d;
     }
 
-    /* TABLET */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,0.55);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+      z-index:1000;
+    }
+
+    .overlay.active{
+      display:flex;
+    }
+
+    .login-box{
+      width:100%;
+      max-width:380px;
+      background:rgba(52,40,0,0.92);
+      border:1px solid rgba(253,238,121,0.22);
+      border-radius:22px;
+      padding:24px 20px;
+      box-shadow:
+        0 0 40px rgba(0,0,0,0.35),
+        inset 0 0 20px rgba(253,238,121,0.08);
+      text-align:left;
+      color:#fdee79;
+    }
+
+    .login-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .login-title{
+      font-size:22px;
+      font-weight:700;
+    }
+
+    .close-btn{
+      background:none;
+      border:none;
+      color:#d6c06b;
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+      padding:2px 6px;
+    }
+
+    .close-btn:hover{
+      color:#fdee79;
+    }
+
+    .login-text{
+      color:#d6c06b;
+      font-size:14px;
+      line-height:1.5;
+      margin-bottom:16px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .field label{
+      font-size:14px;
+      color:#d6c06b;
+    }
+
+    .field input{
+      width:100%;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid rgba(253,238,121,0.18);
+      background:rgba(255,255,255,0.06);
+      color:#fdee79;
+      font-size:16px;
+      outline:none;
+    }
+
+    .field input::placeholder{
+      color:rgba(214,192,107,0.7);
+    }
+
+    .field input:focus{
+      border-color:rgba(253,238,121,0.45);
+      box-shadow:0 0 0 3px rgba(253,238,121,0.08);
+    }
+
+    .login-actions{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+    }
+
+    .primary-btn,
+    .secondary-btn{
+      border:none;
+      border-radius:14px;
+      padding:12px 14px;
+      font-size:15px;
+      cursor:pointer;
+      flex:1;
+    }
+
+    .primary-btn{
+      background:linear-gradient(90deg, #ac8400, #fdee79);
+      color:#342800;
+      font-weight:700;
+    }
+
+    .secondary-btn{
+      background:rgba(255,255,255,0.06);
+      color:#d6c06b;
+      border:1px solid rgba(253,238,121,0.12);
+    }
+
+    .error-msg{
+      margin-top:12px;
+      min-height:20px;
+      font-size:14px;
+      color:#ffb8a6;
+    }
+
     @media (min-width:768px){
       .card{
         max-width:600px;
@@ -123,14 +271,12 @@
       }
     }
 
-    /* DESKTOP */
     @media (min-width:1024px){
       .card{
         max-width:700px;
       }
     }
 
-    /* LANDSCAPE FIX */
     @media (orientation: landscape) and (max-height:700px){
       .card{
         display:flex;
@@ -170,7 +316,9 @@
 <body>
   <div class="card">
     <div class="logo">
-      <img src="icon.png" alt="Honnête Logo">
+      <button id="logoTrigger" type="button" aria-label="Versteckten Zugang öffnen">
+        <img src="icon.png" alt="Honnête Logo">
+      </button>
     </div>
 
     <div class="content">
@@ -191,5 +339,97 @@
       </div>
     </div>
   </div>
+
+  <div class="overlay" id="loginOverlay" aria-hidden="true">
+    <div class="login-box" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <div class="login-head">
+        <div class="login-title" id="loginTitle">Geschützter Zugang</div>
+        <button class="close-btn" id="closeLogin" type="button" aria-label="Fenster schließen">×</button>
+      </div>
+
+      <div class="login-text">
+        Bitte Passwort eingeben, um den internen Bereich zu öffnen.
+      </div>
+
+      <div class="field">
+        <label for="passwordInput">Passwort</label>
+        <input
+          id="passwordInput"
+          type="password"
+          placeholder="Passwort eingeben"
+          autocomplete="current-password"
+        >
+      </div>
+
+      <div class="login-actions">
+        <button class="secondary-btn" id="cancelLogin" type="button">Abbrechen</button>
+        <button class="primary-btn" id="submitLogin" type="button">Öffnen</button>
+      </div>
+
+      <div class="error-msg" id="errorMsg"></div>
+    </div>
+  </div>
+
+  <script>
+    const SECRET_PASSWORD = "22042906";
+    const TARGET_PAGE = "app.html";
+
+    const logoTrigger = document.getElementById("logoTrigger");
+    const loginOverlay = document.getElementById("loginOverlay");
+    const closeLogin = document.getElementById("closeLogin");
+    const cancelLogin = document.getElementById("cancelLogin");
+    const submitLogin = document.getElementById("submitLogin");
+    const passwordInput = document.getElementById("passwordInput");
+    const errorMsg = document.getElementById("errorMsg");
+
+    function openLogin() {
+      loginOverlay.classList.add("active");
+      loginOverlay.setAttribute("aria-hidden", "false");
+      errorMsg.textContent = "";
+      passwordInput.value = "";
+      setTimeout(() => passwordInput.focus(), 50);
+    }
+
+    function closeLoginModal() {
+      loginOverlay.classList.remove("active");
+      loginOverlay.setAttribute("aria-hidden", "true");
+      errorMsg.textContent = "";
+    }
+
+    function handleLogin() {
+      const entered = passwordInput.value.trim();
+
+      if (entered === SECRET_PASSWORD) {
+        window.location.href = TARGET_PAGE;
+      } else {
+        errorMsg.textContent = "Passwort falsch.";
+        passwordInput.focus();
+        passwordInput.select();
+      }
+    }
+
+    logoTrigger.addEventListener("click", openLogin);
+    closeLogin.addEventListener("click", closeLoginModal);
+    cancelLogin.addEventListener("click", closeLoginModal);
+    submitLogin.addEventListener("click", handleLogin);
+
+    passwordInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        handleLogin();
+      }
+    });
+
+    loginOverlay.addEventListener("click", (event) => {
+      if (event.target === loginOverlay) {
+        closeLoginModal();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && loginOverlay.classList.contains("active")) {
+        closeLoginModal();
+      }
+    });
+  </script>
 </body>
 </html>
