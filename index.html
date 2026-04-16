@@ -10,11 +10,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="icon_home.png">
 
   <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;}
 
     body{
       font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -34,69 +30,24 @@
     .card{
       background:rgba(52,40,0,0.65);
       backdrop-filter:blur(20px);
-      -webkit-backdrop-filter:blur(20px);
       border-radius:25px;
       padding:40px 25px;
       width:90%;
       max-width:420px;
-      box-shadow:
-        0 0 40px rgba(172,132,0,0.3),
-        inset 0 0 20px rgba(253,238,121,0.1);
+      box-shadow:0 0 40px rgba(172,132,0,0.3), inset 0 0 20px rgba(253,238,121,0.1);
       border:1px solid rgba(253,238,121,0.2);
     }
 
-    .logo{
-      display:flex;
-      justify-content:center;
-      align-items:center;
-    }
+    .logo button{background:none;border:none;cursor:pointer;}
+    .logo img{width:220px;margin-bottom:25px;}
 
-    .logo button{
-      background:none;
-      border:none;
-      padding:0;
-      cursor:pointer;
-      display:block;
-    }
-
-    .logo button:focus-visible{
-      outline:2px solid rgba(253,238,121,0.8);
-      outline-offset:8px;
-      border-radius:18px;
-    }
-
-    .logo img{
-      width:220px;
-      max-width:100%;
-      height:auto;
-      margin-bottom:25px;
-      display:block;
-      transition:transform 0.18s ease, filter 0.18s ease;
-    }
-
-    .logo button:hover img,
-    .logo button:focus-visible img{
-      transform:scale(1.02);
-      filter:drop-shadow(0 0 10px rgba(253,238,121,0.18));
-    }
-
-    h1{
-      font-size:28px;
-      margin-bottom:15px;
-      font-weight:700;
-    }
-
-    .subtitle{
-      color:#d6c06b;
-      font-size:16px;
-      line-height:1.5;
-    }
+    h1{font-size:28px;margin-bottom:15px;}
+    .subtitle{color:#d6c06b;}
 
     .status{
       margin-top:25px;
       display:flex;
       justify-content:center;
-      align-items:center;
       gap:10px;
       background:rgba(172,132,0,0.15);
       padding:12px;
@@ -104,332 +55,159 @@
     }
 
     .dot{
-      width:10px;
-      height:10px;
-      background:#fdee79;
-      border-radius:50%;
+      width:10px;height:10px;background:#fdee79;border-radius:50%;
       animation:pulse 1.5s infinite;
-      flex-shrink:0;
     }
 
-    @keyframes pulse{
-      0%{opacity:1;}
-      50%{opacity:0.3;}
-      100%{opacity:1;}
-    }
-
-    .footer{
-      margin-top:20px;
-      font-size:13px;
-      color:#bba94d;
-    }
+    @keyframes pulse{0%{opacity:1;}50%{opacity:0.3;}100%{opacity:1;}}
 
     .overlay{
-      position:fixed;
-      inset:0;
+      position:fixed;inset:0;
       background:rgba(0,0,0,0.55);
       backdrop-filter:blur(8px);
-      -webkit-backdrop-filter:blur(8px);
       display:none;
       align-items:center;
       justify-content:center;
-      padding:20px;
       z-index:1000;
     }
 
-    .overlay.active{
-      display:flex;
-    }
+    .overlay.active{display:flex;}
 
     .login-box{
       width:100%;
       max-width:380px;
       background:rgba(52,40,0,0.92);
-      border:1px solid rgba(253,238,121,0.22);
       border-radius:22px;
-      padding:24px 20px;
-      box-shadow:
-        0 0 40px rgba(0,0,0,0.35),
-        inset 0 0 20px rgba(253,238,121,0.08);
-      text-align:left;
-      color:#fdee79;
+      padding:24px;
+      border:1px solid rgba(253,238,121,0.22);
     }
 
-    .login-head{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:18px;
-    }
+    .login-title{font-size:22px;margin-bottom:10px;}
 
-    .login-title{
-      font-size:22px;
-      font-weight:700;
-    }
-
-    .close-btn{
-      background:none;
-      border:none;
-      color:#d6c06b;
-      font-size:26px;
-      line-height:1;
-      cursor:pointer;
-      padding:2px 6px;
-    }
-
-    .close-btn:hover{
-      color:#fdee79;
-    }
-
-    .login-text{
-      color:#d6c06b;
-      font-size:14px;
-      line-height:1.5;
-      margin-bottom:16px;
-    }
-
-    .field{
-      display:flex;
-      flex-direction:column;
-      gap:8px;
-      margin-bottom:14px;
-    }
-
-    .field label{
-      font-size:14px;
-      color:#d6c06b;
-    }
-
+    .field{margin-bottom:12px;text-align:left;}
     .field input{
       width:100%;
-      padding:13px 14px;
-      border-radius:14px;
-      border:1px solid rgba(253,238,121,0.18);
-      background:rgba(255,255,255,0.06);
+      padding:12px;
+      border-radius:10px;
+      border:1px solid rgba(253,238,121,0.2);
+      background:rgba(255,255,255,0.05);
       color:#fdee79;
-      font-size:16px;
-      outline:none;
     }
 
-    .field input::placeholder{
-      color:rgba(214,192,107,0.7);
-    }
-
-    .field input:focus{
-      border-color:rgba(253,238,121,0.45);
-      box-shadow:0 0 0 3px rgba(253,238,121,0.08);
-    }
-
-    .login-actions{
-      display:flex;
-      gap:10px;
-      margin-top:10px;
-    }
-
-    .primary-btn,
-    .secondary-btn{
-      border:none;
-      border-radius:14px;
-      padding:12px 14px;
-      font-size:15px;
-      cursor:pointer;
-      flex:1;
-    }
+    .login-actions{display:flex;gap:10px;margin-top:10px;}
 
     .primary-btn{
-      background:linear-gradient(90deg, #ac8400, #fdee79);
-      color:#342800;
-      font-weight:700;
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:linear-gradient(90deg,#ac8400,#fdee79);
+      font-weight:bold;
+      cursor:pointer;
     }
 
     .secondary-btn{
-      background:rgba(255,255,255,0.06);
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:10px;
+      background:rgba(255,255,255,0.05);
       color:#d6c06b;
-      border:1px solid rgba(253,238,121,0.12);
+      cursor:pointer;
     }
 
-    .error-msg{
-      margin-top:12px;
-      min-height:20px;
-      font-size:14px;
-      color:#ffb8a6;
-    }
-
-    @media (min-width:768px){
-      .card{
-        max-width:600px;
-        padding:50px;
-      }
-
-      h1{
-        font-size:32px;
-      }
-
-      .subtitle{
-        font-size:18px;
-      }
-    }
-
-    @media (min-width:1024px){
-      .card{
-        max-width:700px;
-      }
-    }
-
-    @media (orientation: landscape) and (max-height:700px){
-      .card{
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        gap:40px;
-        text-align:left;
-        max-width:900px;
-        padding:30px;
-      }
-
-      .logo img{
-        width:200px;
-        margin:0;
-      }
-
-      .content{
-        max-width:500px;
-      }
-
-      h1{
-        font-size:30px;
-        margin-bottom:10px;
-      }
-
-      .subtitle{
-        font-size:16px;
-      }
-
-      .status{
-        justify-content:flex-start;
-      }
-    }
+    .error-msg{color:#ffb8a6;margin-top:10px;}
   </style>
 </head>
 
 <body>
-  <div class="card">
-    <div class="logo">
-      <button id="logoTrigger" type="button" aria-label="Versteckten Zugang öffnen">
-        <img src="icon.png" alt="Honnête Logo">
-      </button>
-    </div>
 
-    <div class="content">
-      <h1>Seite in Bearbeitung</h1>
-
-      <p class="subtitle">
-        Diese Seite wird aktuell überarbeitet.<br>
-        Bald wieder verfügbar.
-      </p>
-
-      <div class="status">
-        <span class="dot"></span>
-        <span>Wir arbeiten daran</span>
-      </div>
-
-      <div class="footer">
-        Bitte später erneut versuchen
-      </div>
-    </div>
+<div class="card">
+  <div class="logo">
+    <button id="logoTrigger">
+      <img src="icon.png">
+    </button>
   </div>
 
-  <div class="overlay" id="loginOverlay" aria-hidden="true">
-    <div class="login-box" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
-      <div class="login-head">
-        <div class="login-title" id="loginTitle">Geschützter Zugang</div>
-        <button class="close-btn" id="closeLogin" type="button" aria-label="Fenster schließen">×</button>
-      </div>
+  <h1>Seite in Bearbeitung</h1>
 
-      <div class="login-text">
-        Bitte Passwort eingeben, um den internen Bereich zu öffnen.
-      </div>
+  <p class="subtitle">
+    Diese Seite wird aktuell überarbeitet.<br>
+    Bald wieder verfügbar.
+  </p>
 
-      <div class="field">
-        <label for="passwordInput">Passwort</label>
-        <input
-          id="passwordInput"
-          type="password"
-          placeholder="Passwort eingeben"
-          autocomplete="current-password"
-        >
-      </div>
-
-      <div class="login-actions">
-        <button class="secondary-btn" id="cancelLogin" type="button">Abbrechen</button>
-        <button class="primary-btn" id="submitLogin" type="button">Öffnen</button>
-      </div>
-
-      <div class="error-msg" id="errorMsg"></div>
-    </div>
+  <div class="status">
+    <span class="dot"></span>
+    <span>Wir arbeiten daran</span>
   </div>
+</div>
 
-  <script>
-    const SECRET_PASSWORD = "22042906";
-    const TARGET_PAGE = "app.html";
+<div class="overlay" id="loginOverlay">
+  <div class="login-box">
+    <div class="login-title">Geschützter Zugang</div>
 
-    const logoTrigger = document.getElementById("logoTrigger");
-    const loginOverlay = document.getElementById("loginOverlay");
-    const closeLogin = document.getElementById("closeLogin");
-    const cancelLogin = document.getElementById("cancelLogin");
-    const submitLogin = document.getElementById("submitLogin");
-    const passwordInput = document.getElementById("passwordInput");
-    const errorMsg = document.getElementById("errorMsg");
+    <!-- NEU: Benutzer -->
+    <div class="field">
+      <input id="usernameInput" type="text" placeholder="Benutzer">
+    </div>
 
-    function openLogin() {
-      loginOverlay.classList.add("active");
-      loginOverlay.setAttribute("aria-hidden", "false");
-      errorMsg.textContent = "";
-      passwordInput.value = "";
-      setTimeout(() => passwordInput.focus(), 50);
+    <!-- Passwort -->
+    <div class="field">
+      <input id="passwordInput" type="password" placeholder="Passwort">
+    </div>
+
+    <div class="login-actions">
+      <button class="secondary-btn" id="cancelLogin">Abbrechen</button>
+      <button class="primary-btn" id="submitLogin">Öffnen</button>
+    </div>
+
+    <div class="error-msg" id="errorMsg"></div>
+  </div>
+</div>
+
+<script>
+  const USER = "cmlth";
+  const PASSWORD = "22042906";
+  const TARGET_PAGE = "app.html";
+
+  const logoTrigger = document.getElementById("logoTrigger");
+  const loginOverlay = document.getElementById("loginOverlay");
+  const cancelLogin = document.getElementById("cancelLogin");
+  const submitLogin = document.getElementById("submitLogin");
+
+  const usernameInput = document.getElementById("usernameInput");
+  const passwordInput = document.getElementById("passwordInput");
+  const errorMsg = document.getElementById("errorMsg");
+
+  function openLogin(){
+    loginOverlay.classList.add("active");
+    usernameInput.focus();
+  }
+
+  function closeLogin(){
+    loginOverlay.classList.remove("active");
+    errorMsg.textContent = "";
+  }
+
+  function handleLogin(){
+    const user = usernameInput.value.toLowerCase().trim();
+    const pass = passwordInput.value.trim();
+
+    if(user === USER && pass === PASSWORD){
+      window.location.href = TARGET_PAGE;
+    } else {
+      errorMsg.textContent = "Benutzer oder Passwort falsch";
     }
+  }
 
-    function closeLoginModal() {
-      loginOverlay.classList.remove("active");
-      loginOverlay.setAttribute("aria-hidden", "true");
-      errorMsg.textContent = "";
-    }
+  logoTrigger.onclick = openLogin;
+  cancelLogin.onclick = closeLogin;
+  submitLogin.onclick = handleLogin;
 
-    function handleLogin() {
-      const entered = passwordInput.value.trim();
+  document.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") handleLogin();
+  });
+</script>
 
-      if (entered === SECRET_PASSWORD) {
-        window.location.href = TARGET_PAGE;
-      } else {
-        errorMsg.textContent = "Passwort falsch.";
-        passwordInput.focus();
-        passwordInput.select();
-      }
-    }
-
-    logoTrigger.addEventListener("click", openLogin);
-    closeLogin.addEventListener("click", closeLoginModal);
-    cancelLogin.addEventListener("click", closeLoginModal);
-    submitLogin.addEventListener("click", handleLogin);
-
-    passwordInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-        handleLogin();
-      }
-    });
-
-    loginOverlay.addEventListener("click", (event) => {
-      if (event.target === loginOverlay) {
-        closeLoginModal();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && loginOverlay.classList.contains("active")) {
-        closeLoginModal();
-      }
-    });
-  </script>
 </body>
 </html>
