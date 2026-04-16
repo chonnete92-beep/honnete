@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Honnête App</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height:100vh;
+  padding:20px;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(172,132,0,0.25), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(253,238,121,0.2), transparent 50%),
+    linear-gradient(135deg, #342800, #1a1400);
+
+  color:#fdee79;
+}
+
+/* HEADER */
+.header{
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.header h1{
+  font-size:28px;
+  margin-bottom:5px;
+}
+
+.header p{
+  color:#d6c06b;
+  font-size:14px;
+}
+
+/* GRID */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+/* CARD */
+.card{
+  background: rgba(52,40,0,0.65);
+  backdrop-filter: blur(20px);
+  border-radius:20px;
+  padding:25px 15px;
+  text-align:center;
+  border:1px solid rgba(253,238,121,0.2);
+
+  transition:0.2s;
+  cursor:pointer;
+}
+
+.card:hover{
+  transform:scale(1.03);
+}
+
+/* ICON */
+.icon{
+  font-size:38px;
+  margin-bottom:10px;
+}
+
+/* TITLE */
+.title{
+  font-size:16px;
+  font-weight:600;
+}
+
+/* SUBTEXT */
+.sub{
+  font-size:12px;
+  color:#bba94d;
+  margin-top:5px;
+}
+
+/* DISABLED */
+.disabled{
+  opacity:0.45;
+  cursor:default;
+}
+
+.disabled:hover{
+  transform:none;
+}
+
+/* MOBILE OPTIMIERUNG */
+@media (min-width:768px){
+  .grid{
+    grid-template-columns:repeat(3, 1fr);
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Honnête</h1>
+  <p>Familien App</p>
+</div>
+
+<div class="grid">
+
+  <!-- AKTIV -->
+  <div class="card" onclick="openFamily()">
+    <div class="icon">👨‍👩‍👧‍👧</div>
+    <div class="title">Familie</div>
+  </div>
+
+  <!-- IN BEARBEITUNG -->
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Finanzen</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Immobilien</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Einkauf</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Termine</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Tools</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Notizen</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+  <div class="card disabled">
+    <div class="icon">❓</div>
+    <div class="title">Einstellungen</div>
+    <div class="sub">In Bearbeitung</div>
+  </div>
+
+</div>
+
+<script>
+function openFamily(){
+  alert("Familie App kommt als nächstes 👨‍👩‍👧‍👧");
+  // später:
+  // window.location.href = "familie.html";
+}
+</script>
+
+</body>
+</html>
