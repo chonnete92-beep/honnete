@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Honnête – In Bearbeitung</title>
+
+  <link rel="icon" type="image/png" sizes="32x32" href="icon_favicon.png">
+  <link rel="shortcut icon" href="icon_favicon.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="icon_home.png">
+</head>
+
+<style>
+
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+/* BODY */
+body{
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  background:
+    radial-gradient(circle at 30% 20%, rgba(172,132,0,0.25), transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(253,238,121,0.2), transparent 50%),
+    linear-gradient(135deg, #342800, #1a1400);
+
+  color:#fdee79;
+}
+
+/* CARD */
+.card{
+  background: rgba(52,40,0,0.65);
+  backdrop-filter: blur(20px);
+  border-radius:25px;
+  padding:40px 25px;
+  width:90%;
+  max-width:420px;
+
+  box-shadow:
+    0 0 40px rgba(172,132,0,0.3),
+    inset 0 0 20px rgba(253,238,121,0.1);
+
+  border:1px solid rgba(253,238,121,0.2);
+}
+
+/* LOGO */
+.logo img{
+  width:220px;
+  max-width:100%;
+  margin-bottom:25px;
+}
+
+/* TEXT */
+h1{
+  font-size:28px;
+  margin-bottom:15px;
+  font-weight:700;
+}
+
+.subtitle{
+  color:#d6c06b;
+  font-size:16px;
+  line-height:1.5;
+}
+
+/* STATUS */
+.status{
+  margin-top:25px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  background:rgba(172,132,0,0.15);
+  padding:12px;
+  border-radius:25px;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  background:#fdee79;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%{opacity:1;}
+  50%{opacity:0.3;}
+  100%{opacity:1;}
+}
+
+/* FOOTER */
+.footer{
+  margin-top:20px;
+  font-size:13px;
+  color:#bba94d;
+}
+
+/* ========================= */
+/* 📱 TABLET */
+/* ========================= */
+@media (min-width:768px){
+  .card{
+    max-width:600px;
+    padding:50px;
+  }
+
+  h1{
+    font-size:32px;
+  }
+
+  .subtitle{
+    font-size:18px;
+  }
+}
+
+/* ========================= */
+/* 🖥️ DESKTOP */
+/* ========================= */
+@media (min-width:1024px){
+  .card{
+    max-width:700px;
+  }
+}
+
+/* ========================= */
+/* 🔥 LANDSCAPE FIX */
+/* ========================= */
+@media (orientation: landscape) and (max-height:700px){
+
+  .card{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:40px;
+    text-align:left;
+    max-width:900px;
+    padding:30px;
+  }
+
+  .logo img{
+    width:200px;
+    margin:0;
+  }
+
+  .content{
+    max-width:500px;
+  }
+
+  h1{
+    font-size:30px;
+    margin-bottom:10px;
+  }
+
+  .subtitle{
+    font-size:16px;
+  }
+
+  .status{
+    justify-content:flex-start;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <div class="logo">
+    <img src="icon.png" alt="Logo">
+  </div>
+
+  <div class="content">
+    <h1>Seite in Bearbeitung</h1>
+
+    <p class="subtitle">
+      Diese Seite wird aktuell überarbeitet.<br>
+      Bald wieder verfügbar.
+    </p>
+
+    <div class="status">
+      <span class="dot"></span>
+      Wir arbeiten daran
+    </div>
+
+    <div class="footer">
+      Bitte später erneut versuchen
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
