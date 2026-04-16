@@ -25,6 +25,7 @@
         radial-gradient(circle at 80% 80%, rgba(253,238,121,0.2), transparent 50%),
         linear-gradient(135deg, #342800, #1a1400);
       color:#fdee79;
+      overflow:hidden;
     }
 
     .card{
@@ -50,7 +51,7 @@
     }
 
     h1{font-size:28px;margin-bottom:15px;}
-    .subtitle{color:#d6c06b;}
+    .subtitle{color:#d6c06b; line-height:1.4;}
 
     .status{
       margin-top:25px;
@@ -60,10 +61,14 @@
       background:rgba(172,132,0,0.15);
       padding:12px;
       border-radius:25px;
+      align-items:center;
     }
 
     .dot{
-      width:10px;height:10px;background:#fdee79;border-radius:50%;
+      width:10px;
+      height:10px;
+      background:#fdee79;
+      border-radius:50%;
       animation:pulse 1.5s infinite;
     }
 
@@ -82,22 +87,26 @@
       align-items:center;
       justify-content:center;
       z-index:1000;
+      padding:20px;
     }
 
     .overlay.active{display:flex;}
 
-    .login-box{
+    .login-box,
+    .face-box{
       width:100%;
       max-width:380px;
       background:rgba(52,40,0,0.92);
       border-radius:22px;
       padding:24px;
       border:1px solid rgba(253,238,121,0.22);
+      box-shadow:0 0 35px rgba(172,132,0,0.18);
     }
 
-    .login-title{
+    .login-title,
+    .face-title{
       font-size:22px;
-      margin-bottom:10px;
+      margin-bottom:12px;
     }
 
     .field{
@@ -112,7 +121,18 @@
       border:1px solid rgba(253,238,121,0.2);
       background:rgba(255,255,255,0.05);
       color:#fdee79;
-      font-size:16px; /* WICHTIG → verhindert iPhone Zoom */
+      font-size:16px;
+      outline:none;
+      transition:0.2s;
+    }
+
+    .field input:focus{
+      border-color:rgba(253,238,121,0.45);
+      box-shadow:0 0 0 2px rgba(253,238,121,0.08);
+    }
+
+    .field input:disabled{
+      opacity:0.45;
     }
 
     .login-actions{
@@ -128,7 +148,9 @@
       border-radius:10px;
       background:linear-gradient(90deg,#ac8400,#fdee79);
       font-weight:bold;
+      color:#2b2200;
       cursor:pointer;
+      transition:0.2s;
     }
 
     .secondary-btn{
@@ -139,11 +161,89 @@
       background:rgba(255,255,255,0.05);
       color:#d6c06b;
       cursor:pointer;
+      transition:0.2s;
+    }
+
+    .primary-btn:disabled,
+    .secondary-btn:disabled{
+      opacity:0.45;
+      cursor:not-allowed;
     }
 
     .error-msg{
-      color:#ffb8a6;
-      margin-top:10px;
+      color:#ffcfbf;
+      margin-top:12px;
+      min-height:20px;
+      font-size:14px;
+    }
+
+    .shake{
+      animation:shake 0.35s linear;
+    }
+
+    @keyframes shake{
+      0%{transform:translateX(0);}
+      20%{transform:translateX(-8px);}
+      40%{transform:translateX(8px);}
+      60%{transform:translateX(-6px);}
+      80%{transform:translateX(6px);}
+      100%{transform:translateX(0);}
+    }
+
+    .face-wrap{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:16px;
+    }
+
+    .face-id{
+      width:94px;
+      height:94px;
+      border-radius:24px;
+      border:2px solid rgba(253,238,121,0.7);
+      position:relative;
+      box-shadow:
+        0 0 20px rgba(253,238,121,0.12),
+        inset 0 0 16px rgba(253,238,121,0.08);
+    }
+
+    .face-id::before,
+    .face-id::after{
+      content:"";
+      position:absolute;
+      left:12px;
+      right:12px;
+      height:2px;
+      background:rgba(253,238,121,0.35);
+      border-radius:2px;
+    }
+
+    .face-id::before{top:28px;}
+    .face-id::after{bottom:28px;}
+
+    .scan-line{
+      position:absolute;
+      left:10px;
+      right:10px;
+      height:3px;
+      border-radius:3px;
+      background:linear-gradient(90deg, transparent, #fdee79, transparent);
+      box-shadow:0 0 12px rgba(253,238,121,0.7);
+      animation:scan 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scan{
+      0%{top:16px; opacity:0.25;}
+      50%{top:72px; opacity:1;}
+      100%{top:16px; opacity:0.25;}
+    }
+
+    .face-subtitle{
+      color:#d6c06b;
+      line-height:1.4;
+      font-size:15px;
     }
   </style>
 </head>
@@ -152,8 +252,8 @@
 
 <div class="card">
   <div class="logo">
-    <button id="logoTrigger">
-      <img src="icon.png">
+    <button id="logoTrigger" aria-label="Login öffnen">
+      <img src="icon.png" alt="Honnête Logo">
     </button>
   </div>
 
@@ -171,15 +271,15 @@
 </div>
 
 <div class="overlay" id="loginOverlay">
-  <div class="login-box">
+  <div class="login-box" id="loginBox">
     <div class="login-title">Geschützter Zugang</div>
 
     <div class="field">
-      <input id="usernameInput" type="text" placeholder="Benutzer">
+      <input id="usernameInput" type="text" placeholder="Benutzer" autocomplete="username">
     </div>
 
     <div class="field">
-      <input id="passwordInput" type="password" placeholder="Passwort">
+      <input id="passwordInput" type="password" placeholder="Passwort" autocomplete="current-password">
     </div>
 
     <div class="login-actions">
@@ -191,13 +291,33 @@
   </div>
 </div>
 
+<div class="overlay" id="faceOverlay">
+  <div class="face-box">
+    <div class="face-wrap">
+      <div class="face-title">Identität wird geprüft</div>
+
+      <div class="face-id">
+        <div class="scan-line"></div>
+      </div>
+
+      <div class="face-subtitle">
+        Face ID wird geprüft
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   const USER = "cmlth";
   const PASSWORD = "22042906";
   const TARGET_PAGE = "app.html";
+  const LOCK_TIME = 60000;
 
   const logoTrigger = document.getElementById("logoTrigger");
   const loginOverlay = document.getElementById("loginOverlay");
+  const faceOverlay = document.getElementById("faceOverlay");
+  const loginBox = document.getElementById("loginBox");
+
   const cancelLogin = document.getElementById("cancelLogin");
   const submitLogin = document.getElementById("submitLogin");
 
@@ -205,24 +325,77 @@
   const passwordInput = document.getElementById("passwordInput");
   const errorMsg = document.getElementById("errorMsg");
 
+  function isLocked(){
+    const lockedUntil = Number(localStorage.getItem("honnete_lock_until") || "0");
+    return Date.now() < lockedUntil;
+  }
+
+  function applyLockState(){
+    if(isLocked()){
+      usernameInput.disabled = true;
+      passwordInput.disabled = true;
+      submitLogin.disabled = true;
+      errorMsg.textContent = "Sicherheitssperre";
+    } else {
+      usernameInput.disabled = false;
+      passwordInput.disabled = false;
+      submitLogin.disabled = false;
+      if(errorMsg.textContent === "Sicherheitssperre"){
+        errorMsg.textContent = "";
+      }
+    }
+  }
+
+  function triggerLock(){
+    localStorage.setItem("honnete_lock_until", String(Date.now() + LOCK_TIME));
+    applyLockState();
+
+    setTimeout(() => {
+      applyLockState();
+    }, LOCK_TIME + 100);
+  }
+
   function openLogin(){
     loginOverlay.classList.add("active");
-    setTimeout(() => usernameInput.focus(), 100);
+    applyLockState();
+    setTimeout(() => {
+      if(!isLocked()) usernameInput.focus();
+    }, 120);
   }
 
   function closeLogin(){
     loginOverlay.classList.remove("active");
     errorMsg.textContent = "";
+    usernameInput.value = "";
+    passwordInput.value = "";
+    loginBox.classList.remove("shake");
+  }
+
+  function showFaceCheck(){
+    loginOverlay.classList.remove("active");
+    faceOverlay.classList.add("active");
+
+    setTimeout(() => {
+      window.location.href = TARGET_PAGE;
+    }, 1800);
   }
 
   function handleLogin(){
+    applyLockState();
+    if(isLocked()) return;
+
     const user = usernameInput.value.toLowerCase().trim();
     const pass = passwordInput.value.trim();
 
     if(user === USER && pass === PASSWORD){
-      window.location.href = TARGET_PAGE;
+      errorMsg.textContent = "";
+      showFaceCheck();
     } else {
-      errorMsg.textContent = "Benutzer oder Passwort falsch";
+      errorMsg.textContent = "Sicherheitssperre";
+      loginBox.classList.remove("shake");
+      void loginBox.offsetWidth;
+      loginBox.classList.add("shake");
+      triggerLock();
     }
   }
 
@@ -231,8 +404,12 @@
   submitLogin.onclick = handleLogin;
 
   document.addEventListener("keydown", (e)=>{
+    if(!loginOverlay.classList.contains("active")) return;
     if(e.key === "Enter") handleLogin();
+    if(e.key === "Escape") closeLogin();
   });
+
+  applyLockState();
 </script>
 
 </body>
