@@ -25,20 +25,27 @@ body{
   color:#fdee79;
 }
 
-/* HEADER */
-.header{
-  text-align:center;
-  margin-bottom:25px;
+/* TOPBAR */
+.topbar{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:15px;
 }
 
-.header h1{
-  font-size:28px;
-  margin-bottom:5px;
+.topbar button{
+  padding:8px 14px;
+  border-radius:12px;
+  border:1px solid rgba(253,238,121,0.2);
+  background:rgba(52,40,0,0.6);
+  color:#fdee79;
+  font-size:13px;
+  cursor:pointer;
+  backdrop-filter:blur(10px);
+  transition:0.2s;
 }
 
-.header p{
-  color:#d6c06b;
-  font-size:14px;
+.topbar button:hover{
+  background:rgba(253,238,121,0.2);
 }
 
 /* GRID */
@@ -94,7 +101,7 @@ body{
   transform:none;
 }
 
-/* MOBILE OPTIMIERUNG */
+/* MOBILE */
 @media (min-width:768px){
   .grid{
     grid-template-columns:repeat(3, 1fr);
@@ -105,20 +112,18 @@ body{
 
 <body>
 
-<div class="header">
-  <h1>Honnête</h1>
-  <p>Familien App</p>
+<!-- NEU: TOPBAR -->
+<div class="topbar">
+  <button onclick="logout()">Abmelden</button>
 </div>
 
 <div class="grid">
 
-  <!-- AKTIV -->
   <div class="card" onclick="openFamily()">
     <div class="icon">👨‍👩‍👧‍👧</div>
     <div class="title">Familie</div>
   </div>
 
-  <!-- IN BEARBEITUNG -->
   <div class="card disabled">
     <div class="icon">❓</div>
     <div class="title">Finanzen</div>
@@ -166,8 +171,10 @@ body{
 <script>
 function openFamily(){
   alert("Familie App kommt als nächstes 👨‍👩‍👧‍👧");
-  // später:
-  // window.location.href = "familie.html";
+}
+
+function logout(){
+  window.location.href = "index.html";
 }
 </script>
 
