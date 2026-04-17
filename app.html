@@ -33,7 +33,6 @@
       margin:0 auto;
     }
 
-    /* TOPBAR */
     .topbar{
       display:flex;
       justify-content:space-between;
@@ -67,14 +66,20 @@
       background:rgba(253,238,121,0.15);
     }
 
-    /* GRID */
+    .screen{
+      display:none;
+    }
+
+    .screen.active{
+      display:block;
+    }
+
     .grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:16px;
     }
 
-    /* CARD */
     .card{
       min-height:170px;
       display:flex;
@@ -90,6 +95,7 @@
       border:1px solid rgba(253,238,121,0.18);
       transition:transform 0.2s ease, background 0.2s ease;
       cursor:pointer;
+      user-select:none;
     }
 
     .card:hover{
@@ -114,12 +120,47 @@
     }
 
     .disabled{
-      opacity:0.5;
+      opacity:0.55;
       cursor:default;
     }
 
     .disabled:hover{
       transform:none;
+    }
+
+    .section-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      margin-bottom:18px;
+    }
+
+    .section-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+
+    .section-title{
+      font-size:24px;
+      font-weight:700;
+    }
+
+    .back-btn{
+      min-width:44px;
+      height:44px;
+      padding:0 14px;
+      border-radius:14px;
+      border:1px solid rgba(253,238,121,0.22);
+      background:rgba(52,40,0,0.55);
+      color:#fdee79;
+      font-size:15px;
+      cursor:pointer;
+      backdrop-filter:blur(10px);
+      -webkit-appearance:none;
+      appearance:none;
     }
 
     @media (min-width:900px){
@@ -141,7 +182,8 @@
         padding:14px;
       }
 
-      .topbar{
+      .topbar,
+      .section-head{
         margin-bottom:14px;
       }
 
@@ -149,7 +191,8 @@
         height:30px;
       }
 
-      .topbar button{
+      .topbar button,
+      .back-btn{
         padding:9px 14px;
         font-size:13px;
         border-radius:12px;
@@ -176,86 +219,130 @@
       .sub{
         font-size:12px;
       }
+
+      .section-title{
+        font-size:22px;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <div class="app">
 
     <div class="topbar">
       <div class="logo">
         <img src="icon.png" alt="Honnête Logo">
       </div>
-
       <button onclick="logout()">Abmelden</button>
     </div>
 
-    <div class="grid">
+    <div id="homeScreen" class="screen active">
+      <div class="grid">
 
-      <div class="card" onclick="openFamily()">
-        <div class="icon">👨‍👩‍👧‍👧</div>
-        <div class="title">Familie</div>
+        <div class="card" onclick="showScreen('workScreen')">
+          <div class="icon">💼</div>
+          <div class="title">Arbeit</div>
+        </div>
+
+        <div class="card" onclick="showScreen('familyScreen')">
+          <div class="icon">👨‍👩‍👧‍👧</div>
+          <div class="title">Familie</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">💰</div>
+          <div class="title">Finanzen</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">🏡</div>
+          <div class="title">Immobilien</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">🛒</div>
+          <div class="title">Einkauf</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">📅</div>
+          <div class="title">Termine</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">📝</div>
+          <div class="title">Notizen</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+        <div class="card disabled">
+          <div class="icon">🔧</div>
+          <div class="title">Einstellungen</div>
+          <div class="sub">In Bearbeitung</div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="workScreen" class="screen">
+      <div class="section-head">
+        <div class="section-left">
+          <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
+          <div class="section-title">Arbeit</div>
+        </div>
       </div>
 
-      <div class="card disabled">
-        <div class="icon">💰</div>
-        <div class="title">Finanzen</div>
-        <div class="sub">In Bearbeitung</div>
+      <div class="grid">
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+      </div>
+    </div>
+
+    <div id="familyScreen" class="screen">
+      <div class="section-head">
+        <div class="section-left">
+          <button class="back-btn" onclick="showScreen('homeScreen')">←</button>
+          <div class="section-title">Familie</div>
+        </div>
       </div>
 
-      <div class="card disabled">
-        <div class="icon">🏡</div>
-        <div class="title">Immobilien</div>
-        <div class="sub">In Bearbeitung</div>
+      <div class="grid">
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
+        <div class="card disabled"><div class="icon">❔</div><div class="title">In Bearbeitung</div></div>
       </div>
-
-      <div class="card disabled">
-        <div class="icon">🛒</div>
-        <div class="title">Einkauf</div>
-        <div class="sub">In Bearbeitung</div>
-      </div>
-
-      <div class="card disabled">
-        <div class="icon">📅</div>
-        <div class="title">Termine</div>
-        <div class="sub">In Bearbeitung</div>
-      </div>
-
-      <div class="card disabled">
-        <div class="icon">⚙️</div>
-        <div class="title">Tools</div>
-        <div class="sub">In Bearbeitung</div>
-      </div>
-
-      <div class="card disabled">
-        <div class="icon">📝</div>
-        <div class="title">Notizen</div>
-        <div class="sub">In Bearbeitung</div>
-      </div>
-
-      <div class="card disabled">
-        <div class="icon">🔧</div>
-        <div class="title">Einstellungen</div>
-        <div class="sub">In Bearbeitung</div>
-      </div>
-
     </div>
 
   </div>
 
   <script>
-    function openFamily(){
-      alert("Familie App kommt als nächstes 👨‍👩‍👧‍👧");
-      // später:
-      // window.location.href = "familie.html";
+    function showScreen(screenId){
+      document.querySelectorAll('.screen').forEach(screen => {
+        screen.classList.remove('active');
+      });
+      document.getElementById(screenId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function logout(){
       window.location.href = "index.html";
     }
   </script>
-
 </body>
 </html>
