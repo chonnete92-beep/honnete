@@ -29,7 +29,7 @@
 
     .app{
       width:100%;
-      max-width:980px;
+      max-width:1200px;
       margin:0 auto;
     }
 
@@ -80,7 +80,7 @@
     .grid{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:16px;
+      gap:18px;
     }
 
     .card{
@@ -96,13 +96,14 @@
       padding:24px 16px;
       text-align:center;
       border:1px solid rgba(253,238,121,0.18);
-      transition:transform 0.2s ease, background 0.2s ease;
+      transition:transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
       cursor:pointer;
       user-select:none;
     }
 
     .card:hover{
       transform:scale(1.02);
+      border-color:rgba(253,238,121,0.28);
     }
 
     .icon{
@@ -151,22 +152,73 @@
       display:flex;
     }
 
-    @media (min-width:900px){
+    @media (min-width:1100px){
       body{
         padding:28px;
       }
 
+      .app{
+        max-width:1200px;
+      }
+
+      .topbar{
+        margin-bottom:28px;
+      }
+
+      .logo img{
+        height:42px;
+      }
+
+      .topbar button{
+        padding:12px 20px;
+        font-size:15px;
+        border-radius:16px;
+      }
+
       .grid{
-        gap:20px;
+        gap:24px;
       }
 
       .card{
-        min-height:180px;
+        min-height:220px;
+        border-radius:26px;
+        padding:32px 20px;
+      }
+
+      .icon{
+        font-size:48px;
+        margin-bottom:16px;
+      }
+
+      .title{
+        font-size:19px;
+      }
+
+      .sub{
+        font-size:14px;
       }
 
       .floating-back{
         left:28px;
         bottom:28px;
+      }
+    }
+
+    @media (min-width:700px) and (max-width:1099px){
+      body{
+        padding:24px;
+      }
+
+      .app{
+        max-width:860px;
+      }
+
+      .grid{
+        gap:18px;
+      }
+
+      .card{
+        min-height:180px;
       }
     }
 
@@ -235,6 +287,7 @@
 
     <div id="homeScreen" class="screen active">
       <div class="grid">
+
         <div class="card" onclick="showScreen('workScreen')">
           <div class="icon">💼</div>
           <div class="title">Arbeit</div>
@@ -280,6 +333,7 @@
           <div class="title">Einstellungen</div>
           <div class="sub">In Bearbeitung</div>
         </div>
+
       </div>
     </div>
 
